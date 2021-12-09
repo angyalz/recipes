@@ -5,5 +5,5 @@
         "password": "6cYNDN7x6vl10Ldx",
         "host": "@cluster0.rhcvu.mongodb.net/recipe-app?retryWrites=true&w=majority"
     },
-    "port": 3000
+    "port": 3001
 }

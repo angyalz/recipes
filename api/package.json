@@ -6,7 +6,7 @@
   "scripts": {
     "build": "cd recipe-collection-app && npm i && npm run build",
     "start": "node src/index.js",
-    "start:server": "nodemon --delay 3500ms src/index.js",
+    "start:server": "nodemon src/index.js",
     "start:server-prod": "cross-env NODE_ENV=production node src/index.js",
     "test": "jest",
     "docker:build": "docker build -t fsapi-remek-exercise-angyalz:latest .",
