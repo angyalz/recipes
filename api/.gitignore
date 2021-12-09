@@ -127,5 +127,8 @@ dist
 # Local History for Visual Studio Code
 .history/
 
+# MacOS related
+.DS_Store
+
 # Mongo Config
 # config/
