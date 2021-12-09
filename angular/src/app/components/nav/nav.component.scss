@@ -1,0 +1,41 @@
+* {
+    outline: none;
+    border: 0;
+}
+
+header {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    max-width: 100%;
+
+    mat-toolbar, mat-toolbar-row {
+
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 400;
+
+        span {
+            margin: 0 3%;
+
+            button {
+                background: none;
+                border: none;
+                color: inherit;
+            }
+        }
+
+        mat-icon {
+            margin: 0 0.2em;
+        }
+
+        .title-row {
+            justify-content: center;
+            font-size: medium;
+            height: 1em;
+            padding-bottom: 1.25em;
+        }
+    }
+}

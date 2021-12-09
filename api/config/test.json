@@ -1,0 +1,9 @@
+{
+    "database": {
+        "dbType": "mongodb://",
+        "username": "",
+        "password": "",
+        "host": "localhost:27017/recipeAppTest"
+    },
+    "port": 3001
+}

@@ -1,0 +1,30 @@
+section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: floralwhite;
+    min-height: 90%;
+
+    .container {
+        width: 20em;
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: white;
+        padding: 2em;
+        margin: 4em auto;
+        border-radius: 1em;
+
+        h2 {
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .submit-button {
+            margin: 3em auto 1em;
+        }
+    }
+}

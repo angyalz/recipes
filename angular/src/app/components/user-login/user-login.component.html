@@ -1,0 +1,31 @@
+<section>
+
+
+    <form class="container" [formGroup]="userLogin" (ngSubmit)="login(userLogin.value)">
+        <ng-container>
+
+            <h2>bejelentkezés</h2>
+
+            <mat-form-field appearance="standard">
+                <mat-label>felhasználónév</mat-label>
+                <input matInput placeholder="felhasználónév" formControlName="username" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+                <mat-label>jelszó</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <div>
+                <button class="submit-button" [disabled]="userLogin.invalid" mat-raised-button color="primary">Login</button>
+            </div>
+
+        </ng-container>
+
+    </form>
+
+</section>

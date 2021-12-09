@@ -1,0 +1,42 @@
+<header>
+
+    <mat-toolbar color="primary" role="heading">
+
+        <mat-toolbar-row>
+
+            <span aria-label="Home" matTooltip="kezdőoldal" matTooltipShowDelay="500" [routerLink]="['']"
+                routerLinkActive="router-link-active">
+                Receptek
+            </span>
+
+            <span>
+
+                <button *ngIf="loggedIn" mat-icon-button aria-label="Add new recipe" matTooltip="új recept feltöltése"
+                    [routerLink]="['add-recipe']" routerLinkActive="router-link-active">
+                    <mat-icon>post_add</mat-icon>
+                </button>
+                <button *ngIf="loggedIn" mat-icon-button aria-hidden="false" aria-label="Own recipes"
+                    matTooltip="receptjeim" [routerLink]="['own-recipes']" routerLinkActive="router-link-active" >
+                    <mat-icon>library_books</mat-icon>
+                </button>
+                <button *ngIf="!loggedIn" mat-icon-button aria-hidden="false" aria-label="Registration"
+                    matTooltip="regisztráció" [routerLink]="['user-reg']" routerLinkActive="router-link-active" >
+                    <mat-icon>person_add</mat-icon>
+                </button>
+                <button *ngIf="!loggedIn" mat-icon-button aria-hidden="false" aria-label="Login"
+                    matTooltip="bejelentkezés" [routerLink]="['user-login']" routerLinkActive="router-link-active" >
+                    <mat-icon>login</mat-icon>
+                </button>
+                <button *ngIf="loggedIn" mat-icon-button aria-hidden="true" aria-label="Logout" matTooltip="kilépés"
+                    (click)="logout()"
+                    (click)="menu.visible = false; menu.title=''">
+                    <mat-icon>logout</mat-icon>
+                </button>
+
+            </span>
+
+        </mat-toolbar-row>
+
+    </mat-toolbar>
+
+</header>

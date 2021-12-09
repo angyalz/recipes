@@ -1,0 +1,440 @@
+openapi: 3.0.0
+info:
+  title: fsAPI Recipes Remek Swagger
+  description: fsAPI Recipes Remek Swagger
+  version: 0.1.0
+
+  contact:
+    name: angyalZK
+    email: angyalz79@gmail.com
+
+servers:
+  - url: http://localhost:3000
+    description: This is the local dev server of fsAPI Recipes Remek
+
+
+paths:
+  /recipes:
+    get:
+      summary: return a list of recipes
+      description: This endpoint responsible for listing recipes
+      tags:
+        - getting recipes
+      responses:
+        '200':
+          description: get recipes list in JSON-format
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Recipes"
+        '500':
+          description: error response if internal server error
+          content:
+            appication/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+    post:
+      security:
+        - bearerAuth: []
+      summary: sends the recipe to the server
+      description: this endpoint is responsible for registering a new recipe of an authenticated user
+      tags:
+        - saving a new recipe
+      requestBody:
+        $ref: "#/components/requestBodies/NewRecipeBody"
+      responses:
+        '201':
+          description: recipe saved
+        '403':
+          description: error response if NOT allowed
+          content:
+            appication/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        '400':
+          description: error response if missing fields
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        '500':
+          description: error response if internal server error
+          content:
+            appication/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+
+
+  /recipes{id}:
+    get:
+      summary: return a recipe object
+      description: Get ID from URL and return a JSON object
+      tags:
+        - get recipe by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: get recipe in JSON-format
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Recipes"
+        '400':
+          description: error response if invalid ID
+          content:
+            appication/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        '500':
+          description: error response if internal server error
+          content:
+            appication/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+
+  /ingredients:
+    get:
+      summary: return a list of ingredients
+      description: This endpoint responsible for listing ingredients
+      tags:
+        - getting ingredients
+      responses:
+        '200':
+          description: get Ingredients list in JSON-format
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Ingredients"
+        '500':
+          description: error response if internal server error
+          content:
+            appication/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+
+  /units:
+    get:
+      summary: return a list of units
+      description: This endpoint responsible for listing units
+      tags:
+        - getting units
+      responses:
+        '200':
+          description: get units list in JSON-format
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Units"
+        '500':
+          description: error response if internal server error
+          content:
+            appication/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+
+  /users:
+    get:
+      security:
+        - bearerAuth: []
+      summary: return a list of users
+      description: This endpoint responsible for listing users
+      tags:
+        - getting list of users
+      responses:
+        '200':
+          description: get users list in JSON-format
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    userName:
+                      type: string
+                    email:
+                      type: string
+        '500':
+          description: error response if internal server error
+          content:
+            appication/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+    post:
+      summary: Creates a new user
+      description: This endpoint is responsible for creating and adding a new user to the db
+      tags:
+        - registering a new user
+      requestBody:
+        $ref: "#/components/requestBodies/NewUserBody"
+      responses:
+        '201':
+          description: User created
+        '400':
+          description: error response if missing fields
+          content:
+            appication/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        '500':
+          description: error response if internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+
+  /users{id}:
+    get:
+      security:
+        - bearerAuth: []
+      summary: return a user object
+      description: Get ID from URL and return a JSON object
+      tags:
+        - get user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: get user in JSON-format
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Users"
+        '400':
+          description: error response if invalid ID
+          content:
+            appication/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        '500':
+          description: error response if internal server error
+          content:
+            appication/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+
+  /login:
+    post:
+      summary: Logging in a registered user
+      description: This endpoint is responsible for logging in a registered user to the app
+      tags:
+        - logging in a registered user
+      requestBody:
+        $ref: "#/components/requestBodies/UserLoginBody"
+      responses:
+        '200':
+          description: User logged in
+        '400':
+          description: error response if username or password is incorrect
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+
+  /refresh:
+    post:
+      summary: Refresh a registered and logged in user's token
+      description: This endpoint is gives a new access token for an authenticated user
+      tags:
+        - refresh token
+      requestBody:
+        $ref: "#/components/requestBodies/RefreshTokenBody"
+      responses:
+        '200':
+          description: User logged in
+        '400':
+          description: error response if username or password is incorrect
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+
+
+  /logout:
+    post:
+      summary: Logging out a registered user
+      description: This endpoint is responsible for logging out a registered user from the app
+      tags:
+        - logging out a registered user
+      requestBody:
+        $ref: "#/components/requestBodies/UserLogoutBody"
+      responses:
+        '200':
+          description: User logged out
+        '403':
+          description: error response if invalid token data or missing token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        '500':
+          description: error response if internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+
+components:
+  schemas:
+    Recipes:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        ingredients:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              quantity:
+                type: number
+              unit:
+                type: string
+        methods:
+          type: array
+          items:
+            type: string
+        imageSource:
+          type: string
+
+    Ingredients:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+
+    Units:
+      properties:
+        id:
+          type: string
+        unit:
+          type: string
+
+    Users:
+      properties:
+        id:
+          type: string
+        userName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+          enum: [admin, user]
+        recipes:
+          type: array
+          items:
+            type: string
+
+    BadRequestError: #400
+      properties:
+        errorMessage:
+          type: string
+
+    NotFoundError: #404 
+      properties:
+        errorMessage:
+          type: string
+
+    InternalServerError: #500
+      properties:
+        errorMessage:
+          type: string
+
+    UnauthorizedError: #403
+      properties:
+        errorMessage:
+          type: string
+
+  requestBodies:
+    NewRecipeBody:
+      description: a JSON object which contains the new recipe
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Recipes"
+
+    NewIngredientBody:
+      description: a JSON object which contains the new ingredient
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Ingredients"
+
+    NewUnitBody:
+      description: a JSON object which contains the new unit
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Units"
+
+    NewUserBody:
+      description: a JSON object which contains the new user's datas
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Users"
+
+    UserLoginBody:
+      description: a JSON object which contains the user's datas for login
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              username:
+                type: string
+              password:
+                type: string
+
+    RefreshTokenBody:
+      description: a JSON object which contains the user's datas for logout
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              token:
+                type: string
+
+    UserLogoutBody:
+      description: a JSON object which contains the user's datas for logout
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              token:
+                type: string
+  
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  

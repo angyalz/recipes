@@ -1,0 +1,56 @@
+{
+  "name": "fsapi-remek-server",
+  "version": "1.0.0",
+  "description": "NodeJS Server for AngyalZK's remek Recipe Collection app",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd recipe-collection-app && npm i && npm run build",
+    "start": "node src/index.js",
+    "start:server": "nodemon --delay 3500ms src/index.js",
+    "start:server-prod": "cross-env NODE_ENV=production node src/index.js",
+    "test": "jest",
+    "docker:build": "docker build -t fsapi-remek-exercise-angyalz:latest .",
+    "docker:run": "docker run -p 80:3000 fsapi-remek-exercise-angyalz",
+    "docker-compose:up": "docker-compose up -d",
+    "docker-compose:down": "docker-compose down"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PROGmasters-Ujratervezes/fsapi-remek-exercise-angyalz.git"
+  },
+  "keywords": [
+    "remek",
+    "server",
+    "NodeJS",
+    "express"
+  ],
+  "author": "AngyalZK",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PROGmasters-Ujratervezes/fsapi-remek-exercise-angyalz/issues"
+  },
+  "homepage": "https://github.com/PROGmasters-Ujratervezes/fsapi-remek-exercise-angyalz#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "config": "^3.3.6",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "http-errors": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.7",
+    "mongoose-id-validator": "^0.6.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "swagger-ui-express": "^4.1.6",
+    "winston": "^3.3.3",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "jest": "^27.0.6",
+    "jest-mock-req-res": "^1.0.2",
+    "nodemon": "^2.0.12",
+    "supertest": "^6.1.4"
+  }
+}

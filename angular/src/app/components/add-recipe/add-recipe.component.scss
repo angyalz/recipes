@@ -1,0 +1,70 @@
+section {
+    width: 100%;
+    min-height: 100%;
+    margin: 0 auto;
+    padding-top: 4em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // background: floralwhite;
+
+    h2 {
+        text-align: center;
+        font-weight: 400;
+    }
+
+    form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+
+        .array-label {
+            margin: 3em auto 1em;
+        }
+
+        mat-form-field {
+            margin-bottom: 2em;
+        }
+
+        .ingredients {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: center;
+            max-width: 100%;
+
+            .qty,
+            .unit {
+                width: 17%;
+                margin: 0 0.5%;
+            }
+
+            .ingredient {
+                width: 50%;
+                margin: 0 0.5%;
+            }
+        }
+
+        .methods {
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+            width: 75%;
+            margin: 0 0.5%;
+            mat-form-field {
+                width: 90%;
+                margin: 0 auto;
+            }
+        }
+
+        .upload-icon {
+            font-size: 1.5em;
+        }
+
+        button {
+            margin: 1em auto;
+        }
+    }
+}

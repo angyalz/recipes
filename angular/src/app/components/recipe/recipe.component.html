@@ -1,0 +1,32 @@
+<section>
+
+    <img [src]="BASE_URL + recipe.imageSource" alt={{recipe.title}}>
+
+    <mat-progress-bar *ngIf="componentLoading" mode="indeterminate" color="primary"></mat-progress-bar>
+
+    <div class="title-container" color="primary">
+        <h1>{{ recipe.title }}</h1>
+        <h2>{{ recipe.subtitle }}</h2>
+    </div>
+
+    <div class="card-container">
+        <h3>hozzávalók:</h3>
+        <ul>
+            <li *ngFor="let elem of recipe.ingredients">
+                <span>{{elem.quantity}}</span>
+                <span>{{elem.unit.unitName}}</span>
+                <span>{{elem.ingredient.ingredientName}}</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="card-container">
+        <h3>elkészítés:</h3>
+        <ol>
+            <li *ngFor="let method of recipe.methods, let i = index">
+                {{method[0].method}}
+            </li>
+        </ol>
+    </div>
+
+</section>

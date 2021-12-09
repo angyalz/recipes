@@ -1,0 +1,237 @@
+<mat-progress-bar *ngIf="requestProcessing" mode="indeterminate" color="primary"></mat-progress-bar>
+
+<section>
+
+    <h2>új recept feltöltése</h2>
+
+    <form [formGroup]="addRecipe" (ngSubmit)="saveNewRecipe(addRecipe.value)">
+
+        <!-- title input -->
+
+        <ng-container>
+
+            <mat-form-field class="title" appearance="standard">
+
+                <mat-label>recept címe:</mat-label>
+
+                <input matInput placeholder="Recept címe" formControlName="title" required>
+
+                <mat-error *ngIf="title.invalid 
+                    && (
+                        title.dirty || 
+                        title.touched
+                    )">
+
+                    {{getErrorMessage(addRecipe, "title")}}
+
+                </mat-error>
+
+            </mat-form-field>
+
+        </ng-container>
+
+
+        <!-- subtitle input -->
+
+        <ng-container>
+
+            <mat-form-field class="title" appearance="standard">
+
+                <mat-label>recept alcíme:</mat-label>
+
+                <input matInput placeholder="Recept címe" formControlName="subtitle">
+
+                <mat-error *ngIf="subtitle.invalid 
+                    && (
+                        subtitle.dirty || 
+                        subtitle.touched
+                    )">
+
+                    {{getErrorMessage(addRecipe, "subtitle")}}
+
+                </mat-error>
+
+            </mat-form-field>
+
+        </ng-container>
+
+
+        <!-- ingredients array -->
+
+        <ng-container formArrayName="ingredients">
+
+            <mat-label class="array-label">összetevők:</mat-label>
+
+            <ng-container class="ingredients" *ngFor="let ingredient of ingredients.controls; let i = index"
+                [formGroupName]="i">
+
+                <div class="ingredients">
+
+                    <!-- quantity input -->
+
+                    <mat-form-field class="qty" appearance="standard">
+
+                        <mat-label>mennyiség:</mat-label>
+
+                        <input matInput placeholder="mennyiség" formControlName="quantity" required>
+
+                        <mat-error *ngIf="ingredients?.invalid 
+                            && (
+                                ingredients?.dirty || 
+                                ingredients?.touched
+                            )">
+
+                            {{getErrorMessage(getIngredientsGroup(i), "quantity", i)}}
+
+                        </mat-error>
+
+                    </mat-form-field>
+
+                    <!-- unit input -->
+
+                    <mat-form-field class="unit" appearance="standard">
+
+                        <mat-label>menny. egység:</mat-label>
+
+                        <input matInput placeholder="menny. egység" formControlName="unit" required
+                            [matAutocomplete]="autoUnit">
+
+                        <mat-autocomplete #autoUnit="matAutocomplete">
+                            <mat-option *ngFor="let unitOption of filteredUnitOptions[i] | async" [value]="unitOption">
+                                {{unitOption}}
+                            </mat-option>
+                        </mat-autocomplete>
+
+                        <mat-error *ngIf="ingredients?.invalid 
+                            && (
+                                ingredients?.dirty || 
+                                ingredients?.touched
+                            )">
+
+                            {{getErrorMessage(getIngredientsGroup(i), "unit", i)}}
+
+                        </mat-error>
+
+                    </mat-form-field>
+
+                    <!-- ingredient input -->
+
+                    <mat-form-field class="ingredient" appearance="standard" required>
+
+                        <mat-label>összetevő:</mat-label>
+
+                        <input matInput placeholder="alapanyag" formControlName="ingredient" required
+                            [matAutocomplete]="autoIngr">
+
+                        <mat-autocomplete #autoIngr="matAutocomplete">
+                            <mat-option *ngFor="let ingredientOption of filteredIngredientOptions[i] | async"
+                                [value]="ingredientOption">
+                                {{ingredientOption}}
+                            </mat-option>
+                        </mat-autocomplete>
+
+                        <mat-error *ngIf="ingredients?.invalid 
+                            && (
+                                ingredients?.dirty || 
+                                ingredients?.touched
+                            )">
+
+                            {{getErrorMessage(getIngredientsGroup(i), "ingredient", i)}}
+                        </mat-error>
+
+                    </mat-form-field>
+
+                    <mat-icon color="warn" (click)="removeIngredient(i)">delete_forever</mat-icon>
+
+                </div>
+
+            </ng-container>
+
+            <button type="button" mat-mini-fab color="accent" (click)="addIngredient()">
+                <mat-icon>add</mat-icon>
+            </button>
+
+        </ng-container>
+
+
+        <!-- method array -->
+
+        <ng-container formArrayName="methods">
+
+            <mat-label class="array-label">lépések:</mat-label>
+
+            <ng-container *ngFor="let method of methods.controls; let i = index" [formGroupName]="i">
+
+                <div class="methods">
+
+                    <mat-form-field appearance="standard">
+
+                        <mat-label>lépés leírása:</mat-label>
+
+                        <textarea matInput placeholder="Lépés leírása:" formControlName="method" rows="5"
+                            required></textarea>
+
+                        <mat-error *ngIf="methods?.invalid 
+                            && (
+                                methods?.dirty || 
+                                methods?.touched
+                            )">
+
+                            {{getErrorMessage(getMethodsGroup(i), "method", i)}}
+
+                        </mat-error>
+
+                    </mat-form-field>
+
+                    <mat-icon color="warn" (click)="removeMethod(i)">
+                        delete_forever</mat-icon>
+                </div>
+
+            </ng-container>
+
+            <button type="button" mat-mini-fab color="accent" (click)="addMethod()">
+                <mat-icon>add</mat-icon>
+            </button>
+
+        </ng-container>
+
+
+        <!-- imageFile upload -->
+
+        <ng-container class="file-upload">
+
+            <mat-form-field>
+
+                <mat-label class="array-label">kép feltöltése:</mat-label>
+
+                <ngx-mat-file-input formControlName="imageFile" [multiple]="fileAttr.multiple"
+                    [accept]="fileAttr.accept" [color]="fileAttr.color">
+                    <mat-icon class="upload-icon" ngxMatFileInputIcon>add_photo_alternate</mat-icon>
+                </ngx-mat-file-input>
+
+                <mat-error *ngIf="imageFile.invalid 
+                && (
+                    imageFile.dirty || 
+                    imageFile.touched
+                    )">
+
+                    {{getErrorMessage(addRecipe, "imageFile")}}
+
+                </mat-error>
+
+            </mat-form-field>
+
+
+        </ng-container>
+
+
+        <!-- submit -->
+
+        <div>
+            <button color="accent" [disabled]="addRecipe.invalid" mat-raised-button>mentés</button>
+        </div>
+
+
+    </form>
+
+</section>
