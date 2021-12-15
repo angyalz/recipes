@@ -1,6 +1,6 @@
 # Alkalmazás indítása, használata
 
--  az alkalmazás letöltése (`git clone https://github.com/PROGmasters-Ujratervezes/fsapi-remek-exercise-angyalz.git`) után a `cd api` paranccsal lépjünk be az alkalmazás könyvtárába
+-  az alkalmazás letöltése (`git clone https://github.com/angyalz/recipes.git`) után a `cd api` paranccsal lépjünk be az alkalmazás könyvtárába
 -  adjuk ki az `npm i` parancsot a függőségek telepítéséhez
 -  `npm run docker:build` paranccsal hozzuk létre a Docker képfájlt
 -  ezután az `npm run docker:run` paranccsal indíthatuk a konténerizált alkamazást
