@@ -72,7 +72,7 @@ exports.createNewRecipe = async (req, res, next) => {
 
 exports.getAllRecipes = (req, res, next) => {
 
-    return recipeService.findAll()
+    return recipeService.findAll(req.query)
 
         .then(recipeList => {
             logger.info(`Send all of Recipes list with length:${recipeList.length}`);

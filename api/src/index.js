@@ -6,7 +6,7 @@ const app = require('./server');
 
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.set('useFindAndModify', false);
+// mongoose.set('useFindAndModify', false);
 
 if (!config.has('database')) {
     logger.error('Database config not found');

@@ -21,13 +21,18 @@ exports.findById = (id) => Recipe.findById(id)
     .populate('ingredients.ingredient', 'ingredientName')
     .populate('ingredients.unit', 'unitName');
 
-exports.findByUserId = (userId) => Recipe.find({userId}).sort({ 'updatedAt': 'desc' })
+// exports.findByUserId = (userId) => Recipe.find({userId}).sort({ 'updatedAt': 'desc' })
+//     .populate('ingredients.ingredient', 'ingredientName')
+//     .populate('ingredients.unit', 'unitName');
+
+exports.findAll = (query) => Recipe.find(query).sort({ 'updatedAt': 'desc' })
     .populate('ingredients.ingredient', 'ingredientName')
     .populate('ingredients.unit', 'unitName');
 
-exports.findAll = () => Recipe.find().sort({ 'updatedAt': 'desc' })
-    .populate('ingredients.ingredient', 'ingredientName')
-    .populate('ingredients.unit', 'unitName');
+
+// exports.findAll = () => Recipe.find().sort({ 'updatedAt': 'desc' })
+//     .populate('ingredients.ingredient', 'ingredientName')
+//     .populate('ingredients.unit', 'unitName');
 
 exports.update = (recipeId, updatedRecipe) => Recipe.findByIdAndUpdate(recipeId, updatedRecipe, { new: false });
 
