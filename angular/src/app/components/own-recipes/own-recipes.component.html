@@ -1,9 +1,9 @@
-<section>
+<section class="card-container">
 
 
     <mat-progress-spinner *ngIf="componentLoading" mode="indeterminate" color="primary"></mat-progress-spinner>
 
-    <mat-card *ngFor="let recipe of recipeList" routerLink="/recipe/{{recipe._id}}"
+    <mat-card class="card" *ngFor="let recipe of recipeList" routerLink="/recipe/{{recipe._id}}"
         routerLinkActive="router-link-active">
 
         <mat-card-header>
@@ -15,6 +15,6 @@
 
     </mat-card>
 
-    <h2 *ngIf="recipeList.length === 0" >Még nincsenek saját receptjeid</h2>
+    <h2 *ngIf="recipeList.length === 0 && !componentLoading" >Még nincsenek saját receptjeid</h2>
 
 </section>

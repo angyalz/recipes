@@ -30,7 +30,7 @@ export class HttpService {
   }
 
   getRecipesByUser(user_id: string): Observable<any> {
-    return this.http.get<any[]>(this.URL + 'recipes/?userId=' + user_id);
+    return this.http.get<any[]>(this.URL + 'recipes/?user_id=' + user_id);
   }
 
   getRecipeById(id: any): Observable<any> {

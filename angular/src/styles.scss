@@ -1,67 +1,117 @@
+@use "~@angular/material" as mat;
 
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-@use '~@angular/material' as mat;
-// Plus imports for other components in your app.
+@import "~@angular/material/theming";
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
 @include mat.core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$recipe-collection-app-primary: mat.define-palette(mat.$lime-palette);
-$recipe-collection-app-primary-variant: mat.define-palette(mat.$lime-palette, 700);
-$recipe-collection-app-secondary: mat.define-palette(mat.$yellow-palette, A200, A100, A400);
-$recipe-collection-app-secondary-variant: mat.define-palette(mat.$amber-palette, A200, A100, A400);
-$recipe-collection-app-accent: mat.define-palette(mat.$yellow-palette, A200, A100, A400);
+$light-primary: mat.define-palette(mat.$lime-palette);
+$light-accent: mat.define-palette(mat.$yellow-palette, A200, A100, A400);
+$light-warn: mat.define-palette(mat.$deep-orange-palette);
 
-$recipe-collection-app-onprimary: mat.define-palette(mat.$red-palette, 800);
+$dark-primary: mat.define-palette(mat.$lime-palette);
+$dark-accent: mat.define-palette(mat.$yellow-palette, A200, A100, A400);
+$dark-warn: mat.define-palette(mat.$deep-orange-palette);
 
-$recipe-collection-app-background: mat.define-palette(mat.$grey-palette, 800);
-
-// The warn palette is optional (defaults to red).
-$recipe-collection-app-warn: mat.define-palette(mat.$deep-orange-palette);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-// $recipe-collection-app-theme: mat.define-light-theme((
-//   color: (
-//     primary: $recipe-collection-app-primary,
-//     accent: $recipe-collection-app-accent,
-//     warn: $recipe-collection-app-warn,
-//   )
-// ));
-
-$recipe-collection-app-theme: mat.define-dark-theme((
-  color: (
-    primary: $recipe-collection-app-primary,
-    primary-variant: $recipe-collection-app-primary-variant,
-    secondary: $recipe-collection-app-secondary,
-    secondary-variant: $recipe-collection-app-secondary-variant,
-    accent: $recipe-collection-app-accent,
-    warn: $recipe-collection-app-warn,
-    on-primary: $recipe-collection-app-onprimary,
-    background: $recipe-collection-app-background,
-    color: $recipe-collection-app-onprimary,
+$light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $light-primary,
+      accent: $light-accent,
+      warn: $light-warn,
+    ),
   )
-));
+);
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.all-component-themes($recipe-collection-app-theme);
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $dark-primary,
+      accent: $dark-accent,
+      warn: $dark-warn,
+    ),
+  )
+);
 
-/* You can add global styles to this file, and also import other style files */
-// @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@include mat.all-component-themes($dark-theme);
 
-html, body { 
-  height: 100%; 
+.dark-mode {
+  @include mat.all-component-colors($dark-theme);
+  // @include mat.core-color($dark-theme);
+  // background: #212121;
 }
-body { 
-  margin: 0; 
-  font-family: Roboto, "Helvetica Neue", sans-serif; 
+
+.light-mode {
+  @include mat.all-component-colors($light-theme);
 }
 
+// .auto-mode {
+//     @media (prefers-color-scheme: light) {
+//         @include mat.all-component-themes($recipe-light-theme);
+//     }
+
+//     @media (prefers-color-scheme: dark) {
+//         @include mat.all-component-themes($recipe-dark-theme);
+//     }
+// }
+
+html, body, * {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.snackbar-ok {
+  background: #1b5e20 !important;
+  color: whitesmoke !important;
+  box-shadow: 2px 4px 8px 0 rgba(0, 0, 0, 0.8) !important;
+}
+
+.snackbar-error {
+  background: #610101 !important;
+  color: whitesmoke !important;
+  box-shadow: 2px 4px 8px 0 rgba(0, 0, 0, 0.8) !important;
+}
+
+.card-container {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  // background: floralwhite;
+  // background: #212121;
+  min-height: 100%;
+  padding-top: 3em;
+
+  .card {
+    width: 24em;
+    height: 32em;
+    margin: 2em 1em;
+    // box-shadow: 8px 8px 12px red;
+
+    mat-card-header {
+      height: 6em;
+    }
+
+    img {
+      height: 24em;
+      object-fit: cover;
+      object-position: center;
+    }
+    
+    &:hover {
+      box-shadow: 6px 6px 12px currentColor;
+    }
+  }
+
+}

@@ -7,7 +7,7 @@
 
             <mat-form-field appearance="standard">
                 <mat-label>felhasználónév</mat-label>
-                <input matInput placeholder="felhasználónév" formControlName="username" required>
+                <input type="text" matInput placeholder="felhasználónév" formControlName="username" required>
                 <mat-error *ngIf="username.invalid 
                     && (
                         username.dirty || 
@@ -19,7 +19,7 @@
 
             <mat-form-field appearance="standard">
                 <mat-label>emailcím</mat-label>
-                <input matInput placeholder="pat@example.com" formControlName="email" required>
+                <input type="email" matInput placeholder="pat@example.com" formControlName="email" required>
                 <mat-error *ngIf="email.invalid 
                     && (
                         email.dirty || 

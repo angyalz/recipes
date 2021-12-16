@@ -72,6 +72,8 @@ exports.createNewRecipe = async (req, res, next) => {
 
 exports.getAllRecipes = (req, res, next) => {
 
+    console.log(req.query);     // debug
+
     return recipeService.findAll(req.query)
 
         .then(recipeList => {

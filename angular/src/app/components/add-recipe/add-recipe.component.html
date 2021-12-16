@@ -14,7 +14,7 @@
 
                 <mat-label>recept címe:</mat-label>
 
-                <input matInput placeholder="Recept címe" formControlName="title" required>
+                <input type="text" matInput placeholder="Recept címe" formControlName="title" required>
 
                 <mat-error *ngIf="title.invalid 
                     && (
@@ -39,7 +39,7 @@
 
                 <mat-label>recept alcíme:</mat-label>
 
-                <input matInput placeholder="Recept címe" formControlName="subtitle">
+                <input type="text" matInput placeholder="Recept címe" formControlName="subtitle">
 
                 <mat-error *ngIf="subtitle.invalid 
                     && (
@@ -73,7 +73,7 @@
 
                         <mat-label>mennyiség:</mat-label>
 
-                        <input matInput placeholder="mennyiség" formControlName="quantity" required>
+                        <input type="number" matInput placeholder="mennyiség" formControlName="quantity" required>
 
                         <mat-error *ngIf="ingredients?.invalid 
                             && (
@@ -93,7 +93,7 @@
 
                         <mat-label>menny. egység:</mat-label>
 
-                        <input matInput placeholder="menny. egység" formControlName="unit" required
+                        <input type="text" matInput placeholder="menny. egység" formControlName="unit" required
                             [matAutocomplete]="autoUnit">
 
                         <mat-autocomplete #autoUnit="matAutocomplete">
@@ -120,7 +120,7 @@
 
                         <mat-label>összetevő:</mat-label>
 
-                        <input matInput placeholder="alapanyag" formControlName="ingredient" required
+                        <input type="text" matInput placeholder="alapanyag" formControlName="ingredient" required
                             [matAutocomplete]="autoIngr">
 
                         <mat-autocomplete #autoIngr="matAutocomplete">

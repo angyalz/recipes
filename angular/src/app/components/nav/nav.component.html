@@ -28,10 +28,14 @@
                     <mat-icon>login</mat-icon>
                 </button>
                 <button *ngIf="loggedIn" mat-icon-button aria-hidden="true" aria-label="Logout" matTooltip="kilépés"
-                    (click)="logout()"
-                    (click)="menu.visible = false; menu.title=''">
+                    (click)="logout()">
+                    <!-- (click)="menu.visible = false; menu.title=''"> -->
                     <mat-icon>logout</mat-icon>
                 </button>
+                <!-- <button class="theme-button" mat-icon-button [matTooltip]="themeToolTip" matTooltipShowDelay="250"
+                    (click)="changeTheme()">
+                    <mat-icon>{{themeMode}}</mat-icon>
+                </button> -->
 
             </span>
 

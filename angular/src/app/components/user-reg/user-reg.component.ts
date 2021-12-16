@@ -93,14 +93,18 @@ export class UserRegComponent implements OnInit {
 
       (data: any) => {
         this.userReg.reset();
-        this._snackBar.open(`Sikeres regisztáció`, 'OK', { duration: 3000 });
+        this._snackBar.open(`Sikeres regisztáció`, 'OK', { 
+          duration: 3000,
+          panelClass: ['snackbar-ok'] 
+        });
         this.login(user);
       },
 
       (err) => {
         this._snackBar.open(`Hoppá, valami döcög a szerverkapcsolatban: \nSzerverválasz: ${err.statusText}: ${err.status}`,
           'OK', {
-          duration: 5000
+          duration: 5000,
+            panelClass: ['snackbar-error']
         });
         console.log(err);
       },
@@ -117,12 +121,16 @@ export class UserRegComponent implements OnInit {
         (err) => {
           this._snackBar.open(`Hoppá, nem sikerült bejelentkezni! \nSzerverválasz: ${err.error}\nKód: ${err.status}`,
             'OK', {
-            duration: 5000
+            duration: 5000,
+              panelClass: ['snackbar-error']
           });
           console.error(err);
         },
         () => {
-          this._snackBar.open(`Sikeres belépés`, 'OK', { duration: 2000 });
+          this._snackBar.open(`Sikeres belépés`, 'OK', { 
+            duration: 2000, 
+            panelClass: ['snackbar-ok']
+          });
           this.router.navigate(['/recipes']);
         }
       )
